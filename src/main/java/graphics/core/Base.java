@@ -1,5 +1,6 @@
 package graphics.core;
 
+import org.lwjgl.Version;
 import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.glfw.Callbacks.*;
@@ -34,6 +35,9 @@ public abstract class Base {
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         GL.createCapabilities();
+
+        OpenGLUtils.checkVersion();
+        System.out.println("LWJGL version: " + Version.getVersion());
     }
 
     public abstract void initialize();
