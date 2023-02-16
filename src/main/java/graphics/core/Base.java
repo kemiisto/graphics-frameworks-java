@@ -12,6 +12,15 @@ public abstract class Base {
     private long window;
     private boolean running;
 
+    // number of seconds application has been running
+    public float time;
+    // seconds since last iteration of run loop
+    public float deltaTime;
+
+    // store time data from last iteration of run loop
+    private long previousTime;
+    private long currentTime;
+
     public Base() {}
 
     public void startup() {
@@ -31,6 +40,10 @@ public abstract class Base {
         }
 
         running = true;
+        time = 0;
+        deltaTime = 1/60.0f;
+        currentTime = System.currentTimeMillis();
+        previousTime = System.currentTimeMillis();
 
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
@@ -54,6 +67,13 @@ public abstract class Base {
 
         while (running) {
             glfwPollEvents();
+
+            // recalculate time variables
+            currentTime = System.currentTimeMillis();
+            deltaTime = (currentTime - previousTime) / 1000.0f;
+            time += deltaTime;
+            previousTime = currentTime;
+
             if (glfwWindowShouldClose(window)) {
                 running = false;
             }
