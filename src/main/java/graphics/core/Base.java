@@ -12,6 +12,9 @@ public abstract class Base {
     private long window;
     private boolean running;
 
+    // handle user input events
+    public Input input;
+
     // number of seconds application has been running
     public float time;
     // seconds since last iteration of run loop
@@ -40,6 +43,9 @@ public abstract class Base {
         }
 
         running = true;
+
+        input = new Input(window);
+
         time = 0;
         deltaTime = 1/60.0f;
         currentTime = System.currentTimeMillis();
@@ -73,6 +79,8 @@ public abstract class Base {
             deltaTime = (currentTime - previousTime) / 1000.0f;
             time += deltaTime;
             previousTime = currentTime;
+
+            input.update();
 
             if (glfwWindowShouldClose(window)) {
                 running = false;
