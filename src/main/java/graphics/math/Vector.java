@@ -20,4 +20,12 @@ public class Vector {
         s.append("]");
         return s.toString();
     }
+
+    public static double dot(Vector v, Vector w) {
+        double c = 0;
+        for (int i = 0; i < v.values.length; i++) {
+            c += v.values[i] * w.values[i];
+        }
+        return c;
+    }
 }
