@@ -14,7 +14,7 @@ public class Matrix {
         this.flatValues = new float[rows*cols];
     }
 
-    public float[] flatter() {
+    public float[] flatten() {
         for (int rowNum = 0; rowNum < rows; rowNum++) {
             for (int colNum = 0; colNum < cols; colNum++) {
                 flatValues[colNum + rowNum * cols] = (float)values[rowNum][colNum];

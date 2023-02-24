@@ -2,8 +2,7 @@ package graphics.core;
 
 import static org.lwjgl.opengl.GL30.*;
 
-import java.util.Arrays;
-
+import graphics.math.Matrix;
 import graphics.math.Vector;
 
 public class Uniform<T> {
@@ -43,26 +42,30 @@ public class Uniform<T> {
             case "vec2" -> {
                 Vector v = (Vector) data;
                 glUniform2f(variable,
-                    (float) v.values[0],
-                    (float) v.values[1]
+                    (float)v.values[0],
+                    (float)v.values[1]
                 );
             }
             case "vec3" -> {
                 Vector v = (Vector) data;
                 glUniform3f(variable,
-                    (float) v.values[0],
-                    (float) v.values[1],
-                    (float) v.values[2]
+                    (float)v.values[0],
+                    (float)v.values[1],
+                    (float)v.values[2]
                 );
             }
             case "vec4" -> {
                 Vector v = (Vector) data;
                 glUniform4f(variable,
-                    (float) v.values[0],
-                    (float) v.values[1],
-                    (float) v.values[2],
-                    (float) v.values[3]
+                    (float)v.values[0],
+                    (float)v.values[1],
+                    (float)v.values[2],
+                    (float)v.values[3]
                 );
+            }
+            case "mat4" -> {
+                Matrix m = (Matrix)data;
+                glUniformMatrix4fv(variable, true, m.flatten());
             }
         }
     }
